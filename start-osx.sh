@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# -f选项用于指定镜像的格式，qcow2格式是QEMU最常用的镜像格式，osx_hdd.img是镜像文件的名字，128G是镜像文件大小
 if [ ! -e '/data/osx_hdd.img' ]
 then
     qemu-img create -f qcow2 '/data/osx_hdd.img' 128G
 fi
 
+# -m表示指定虚拟机内存大小，单位是MB
+# 
 qemu-system-x86_64 -enable-kvm \
   -m 4096 \
   -cpu Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on \
